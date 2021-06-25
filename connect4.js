@@ -21,6 +21,7 @@ class Game {
     this.handleClick = this.handleClick.bind(this);
     this.makeBoard();
     this.makeHtmlBoard();
+    //this.gameOver = false;
   }
 
   /** makeBoard: create in-JS board structure:
@@ -110,11 +111,13 @@ class Game {
     this.board[y][x] = this.currPlayer;
     this.placeInTable(y, x);
     
+
+
     // check for win
     if (this.checkForWin()) {
       return this.endGame(`Player ${this.currPlayer} won!`);
     }
-    
+
     // check for tie
     if (this.board.every(row => row.every(cell => cell))) {
       return this.endGame('Tie!');
@@ -131,7 +134,7 @@ class Game {
       // Check four cells to see if they're all color of current player
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match currPlayer
-      
+
       return cells.every(
         ([y, x]) =>
           y >= 0 &&
@@ -151,8 +154,10 @@ class Game {
         const diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
         const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
+        let bindWin = _win.bind(this);
         // find winner (only checking each win-possibility as needed)
-        if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
+        //.call as another way 
+        if (_win.call(this, horiz) || bindWin(vert) || bindWin(diagDR) || bindWin(diagDL)) {
           return true;
         }
       }
