@@ -14,10 +14,13 @@
 
 function startGameButton() {
   let button = document.getElementById("startGame");
+  console.log('startGameButton', button);
   button.addEventListener("click", function(event){
-    alert("YOU CLICKED THE BUTTON!")
+    new Game(6,7);
   });
 }
+
+startGameButton();
 
 class Game {
   constructor(height, width) {
@@ -146,7 +149,8 @@ class Game {
       // Check four cells to see if they're all color of current player
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match currPlayer
-
+      // the .every callback is an arrow function, doesn't get it's own this
+      // when it uses this, it's looking to _win, but _win doesn't know what 'this' is
       return cells.every(
         ([y, x]) =>
           y >= 0 &&
@@ -168,7 +172,7 @@ class Game {
 
         let bindWin = _win.bind(this);
         // find winner (only checking each win-possibility as needed)
-        //.call as another way 
+        // .call as another way 
         if (_win.call(this, horiz) || bindWin(vert) || bindWin(diagDR) || bindWin(diagDL)) {
           this.gameOver = true;
           return true;
