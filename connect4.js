@@ -12,7 +12,6 @@
 
 function startGameButton() {
   let button = document.getElementById("startGame");
-  console.log('startGameButton', button);
   button.addEventListener("click", function(event){
     let boardNode = document.getElementById("board")
     while (boardNode.firstChild) {
@@ -20,10 +19,9 @@ function startGameButton() {
     }
     let p1 = new Player(document.getElementById("p1").value);
     let p2 = new Player(document.getElementById("p2").value);
-    new Game(p1, p2, 6,7);
+    new Game(p1, p2);
   });
 }
-
 startGameButton();
 
 class Game {
@@ -141,7 +139,9 @@ class Game {
     }
       
     // switch players
-    this.currPlayer = this.currPlayer === this.players[0] ? this.players[1] : this.players[0];
+    this.currPlayer = this.currPlayer === this.players[0] 
+      ? this.players[1] 
+      : this.players[0];
   }
 
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -190,4 +190,3 @@ class Player {
 }
 
 let game = new Game();
-
