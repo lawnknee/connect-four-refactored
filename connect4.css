@@ -48,3 +48,10 @@
   background-color: gold;
 }
 
+/* start button */
+
+button {
+  margin-left: 10px;
+  border-radius: 8px;
+  padding: 5px;
+}
