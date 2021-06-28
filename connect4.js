@@ -17,8 +17,8 @@ function startGameButton() {
     while (boardNode.firstChild) {
       boardNode.removeChild(boardNode.firstChild);
     }
-    let p1 = new Player(document.getElementById("p1").value);
-    let p2 = new Player(document.getElementById("p2").value);
+    let p1 = new Player(document.getElementById("Player1").value, document.getElementsByClassName("p1")[0].id);
+    let p2 = new Player(document.getElementById("Player2").value, document.getElementsByClassName("p2")[0].id);
     new Game(p1, p2);
   });
 }
@@ -94,7 +94,7 @@ class Game {
 
   placeInTable(y, x) {
     const piece = document.createElement('div');
-    piece.classList.add('piece');
+    piece.classList.add("piece", "fall");
     piece.style.backgroundColor = this.currPlayer.color;
     piece.style.top = -50 * (y + 2);
   
@@ -129,7 +129,7 @@ class Game {
     // check for win
     if (this.checkForWin()) {
       //this.gameOver = true;
-      return this.endGame(`The ${this.currPlayer.color} player won!`);
+      return this.endGame(`${this.currPlayer.id} won!`);
     }
 
     // check for tie
@@ -151,6 +151,7 @@ class Game {
       // Check four cells to see if they're all color of current player
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match currPlayer
+      
       // the .every callback is an arrow function, doesn't get it's own this
       // when it uses this, it's looking to _win, but _win doesn't know what 'this' is
       return cells.every(
@@ -184,9 +185,10 @@ class Game {
 }
 
 class Player {
-  constructor(color) {
+  constructor(color, id) {
     this.color = color;
+    this.id = id;
   }
 }
 
-let game = new Game();
+// let game = new Game();

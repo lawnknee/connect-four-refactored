@@ -6,9 +6,14 @@
 <body>
 
 <div id="game">
-  <input type="text" placeholder="Input player 1 color" id="p1">
-  <input type="text" placeholder="Input player 2 color" id="p2">
+  <label for="player1">Pick Player 1's color:</label>
+  <input type="color" id="Player1" class="p1" value=#ff0000>
+  
+  <label for="player2">Pick Player 2's color:</label>
+  <input type="color" id="Player2" class="p2" value=#0000ff>
+  
   <button id="startGame">Start Game!</button>
+  
   <table id="board"></table>
 </div>
 

@@ -14,6 +14,21 @@
   height: 80%;
   border-radius: 50%;
 }
+
+.fall {
+  animation-name: fall-animation;
+  animation-duration: 1000ms;
+}
+
+@keyframes fall-animation {
+  from {
+      transform: translateY(-300px);
+  }
+  to {
+      transform: translateY(0);
+  }
+}
+
 /* 
 .piece.p1 {
   background-color: red;
@@ -32,3 +47,4 @@
 #column-top td:hover {
   background-color: gold;
 }
+
